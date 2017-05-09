@@ -9,17 +9,22 @@ Please see the usage guide below for more details on existing functionality and 
 ## Usage
 
 ### Using the HTML UI
-The current html UI: https://ibm-ba-il.github.io/TWC_WeatherDataDownload/ allows the user to download historical data for a location given a certain date range. The data is downloaded in CSV and can be on a daily or hourly level. 
+The current html UI: https://ibm-ba-il.github.io/TWC_WeatherDataDownload/ allows the user to download historical data for a location given a certain date range. 
+
+UI Screenshot(Image): 
+![](Docs/UIScreenshot.png?raw=true "UI Screenshot")
+
+The data is downloaded in CSV and can be on a daily or hourly level. 
 
 
 
 
 Example Daily(Image): 
-[Daily Data Download Example](Docs/DailyExample.png)
+![](Docs/DailyExample.png?raw=true "Daily Example Data")
 
 
 Example Hourly(Image): 
-[Hourly Data Download Example](Docs/HourlyExample.png)
+![](Docs/HourlyExample.png? raw=true "Hourly Example Data")
 
 
 
