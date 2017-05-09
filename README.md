@@ -22,7 +22,6 @@ The data is downloaded in CSV and can be on a daily or hourly level.
 Example Daily(Image): 
 ![](Docs/DailyExample.png?raw=true "Daily Example Data")
 
-
 Example Hourly(Image): 
 ![](Docs/HourlyExample.png?raw=true "Hourly Example Data")
 
