@@ -24,7 +24,7 @@ Example Daily(Image):
 
 
 Example Hourly(Image): 
-![](Docs/HourlyExample.png? raw=true "Hourly Example Data")
+![](Docs/HourlyExample.png?raw=true "Hourly Example Data")
 
 
 
