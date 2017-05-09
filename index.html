@@ -1,0 +1,303 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
+<!--
+ * Copyright (c) 2015 IBM Corporation and others.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+
+<!--
+        jQuery Copyright © 2010 by The jQuery Project
+        bootstrap Copyright (c) 2011-2016 Twitter, Inc.
+        jQuery-UI Copyright 2017 The jQuery Foundation. jQuery License
+        jQuery-Validate Copyright 2017 The jQuery Foundation. jQuery License
+    -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+
+    <script src="js/vendor/jquery-1.11.2.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/jquery-ui.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/vendor/jquery.validate.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+
+    <style>
+        body {
+            background: url(bg.png) no-repeat fixed;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-size: cover;
+            background-position: 50%;
+            -webkit-font-smoothing: antialiased;
+            font-smoothing: antialiased;
+        }
+        
+        #apiUrlForm label.error {
+            margin-left: 10px;
+            width: auto;
+            display: inline;
+            color: white;
+            background-color: rgb(190, 15, 15);
+            padding: 10px;
+            font-size: 1.2rem;
+            letter-spacing: .1rem;
+            font-weight: 250;
+            border-color: #ffffff;
+            border: 1px;
+        }
+        
+        .form .line .input_select {
+            position: relative;
+            font-size: 1.5rem;
+            letter-spacing: .1rem;
+            font-weight: 200;
+            background: transparent url('arrow.png') no-repeat;
+            background-size: 20px;
+            background-position: right 10px center;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            border-top: none;
+            border-left: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            border-right: none;
+            color: rgba(255, 255, 255, 0.8);
+            padding-left: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .arrow_box {
+            position: relative;
+            background: #d50b2c;
+            border: 1px solid #ffffff;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+
+            //Adding date picker jquery UI to date form elements
+            $("#sdate").datepicker();
+            $("#edate").datepicker();
+
+            //Triggering the visibility of location elements based on selection
+            $("#zipInput").css("display", "none");
+            $("#locationType").change(function() {
+                var selectedOption = $("#locationType").val();
+                if (selectedOption == "latlongOption") {
+                    $("#latlong").css("display", "block");
+                    $("#zipInput").css("display", "none");
+                    console.log("latLongSelected");
+                } else {
+                    $("#zipInput").css("display", "block");
+                    $("#latlong").css("display", "none");
+                    console.log("zipcodeSelected");
+                }
+            });
+        });
+    </script>
+
+
+
+    <script>
+        //To make the API Call
+        function postUrl() {
+
+            var formValidValue = $("#apiUrlForm").valid();
+
+
+            if (formValidValue) {
+
+                var basicUrl = 'http://cleanedobservations.wsi.com/CleanedObs.svc/GetObs?version=2';
+                var finalUrl = basicUrl;
+
+                //To take in location (zipcode/lat/long); Need if statement to decide what to feed the location variable
+                var locationdropdown = document.getElementById("locationType");
+                var locationTypeValue = locationdropdown.options[locationdropdown.options.selectedIndex].value;
+                console.log("Location selected is ####" + locationTypeValue);
+
+                if (locationTypeValue == "zipcodeOption") {
+
+                    var locationURLType = "zipcode";
+                    var zipValue = document.getElementById("zip").value;
+                    console.log("Zipcode entered is  " + zipValue);
+                    finalUrl = finalUrl + "&" + locationURLType + "=" + zipValue;
+                }
+
+                if (locationTypeValue == "latlongOption") {
+                    var locationURLType1 = "lat";
+                    var locationURLType2 = "long";
+
+                    var latValues = document.getElementById("lat").value;
+                    console.log("lat:" + latValues);
+
+                    var longValues = document.getElementById("long").value;
+                    console.log("long:" + longValues);
+                    finalUrl = finalUrl + "&" + locationURLType1 + "=" + latValues + "&" + locationURLType2 + "=" + longValues;
+                    console.log(finalUrl);
+                }
+
+                //Getting Date Range
+                var dateUrl1 = "startDate";
+                var dateValue1 = document.getElementById("sdate").value;
+                var dateUrl2 = "endDate";
+                var dateValue2 = document.getElementById("edate").value;
+                finalUrl += "&" + dateUrl1 + "=" + dateValue1 + "&" + dateUrl2 + "=" + dateValue2;
+                console.log(finalUrl);
+
+                //Getting Time Interval
+                var intervalUrl = 'interval';
+                var intervalEl = document.getElementById("timeInterval");
+                var intervalValue = intervalEl.options[intervalEl.options.selectedIndex].value;
+                console.log("interval type is" + intervalValue);
+                finalUrl += "&" + intervalUrl + "=" + intervalValue;
+                console.log(finalUrl);
+
+                //Getting Time Units
+                var unitsUrl = 'units';
+                var unitsEl = document.getElementById("unitSelection");
+                var unitsValue = unitsEl.options[unitsEl.options.selectedIndex].value;
+                console.log("interval type is" + unitsValue);
+                finalUrl += "&" + unitsUrl + "=" + unitsValue;
+                console.log(finalUrl);
+
+                //Specify Default Time Units(options are: json, csv, xml)
+                var formatUrl = 'format';
+                var formatValue = 'csv';
+                finalUrl += "&" + formatUrl + "=" + formatValue;
+
+                //Finally get API Key from user
+                var apiUrl = 'userKey';
+                var apiValue = document.getElementById("apikey").value;
+                finalUrl += "&" + apiUrl + "=" + apiValue;
+
+                console.debug("Final URL being sent" + finalUrl);
+                window.location.href = finalUrl;
+
+            }
+        }
+    </script>
+
+
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+
+            <!-- Example row of columns -->
+            <div class="col-md-6">
+                <form id="apiUrlForm">
+                    <fieldset>
+                        <div class="row form">
+                            <div class="forcebg"></div>
+                            <!--  API key input-->
+                            <div class="line"> <label class="labels">API KEY:</label> <input name="x1" id="apikey" class="input required" type="text" /></div>
+                            <!--  Location Select-->
+                            <div class="line"> <label class="labels_left">LOCATION:</label><select id="locationType" class="form-control input_select" style="width:200px">
+                            <option value="zipcodeOption" class="slate">Zipcode(US Only)</option>
+                            <option selected="selected" value="latlongOption" class="slate">Latitude-Longitude</option>
+                            </select>
+                            </div>
+                            <!--  Lat Long Input-->
+                            <div id="latlong" class="line">
+                                <label class="labels">LATITUDE:</label> <input name="x2" id="lat" type="text" class="input required" /> <br/><label class="labels">LONGITUDE:</label> <input name="x3" id="long" type="text" class="input required" /></div>
+
+
+                            <!--  Zipcode Input-->
+                            <div id="zipInput" class="line">
+                                <label class="labels"> ZIPCODE:</label> <input name="x4" id="zip" type="text" class="input required" />
+                            </div>
+                            <p></p>
+
+                            <!--  From Date Input-->
+                            <div class="line"> <label class="labels">FROM DATE:</label> <input name="x5" id="sdate" type="text" class="input required" /><br/>
+                                <!--  To Date Input-->
+                                <label class="labels">TO DATE:</label> <input name="x6" id="edate" type="text" class="input required" />
+                            </div>
+
+                            <!--  Time Interval Selection-->
+                            <div class="line"><label class="labels_left">TIME INTERVAL:</label> <select id="timeInterval" class="form-control input_select" style="width:200px">
+                            <option value="hourly" class="slate">Hourly</option>
+                            <option value="daily" class="slate">Daily</option>
+                            </select>
+                            </div>
+
+                            <!--  Units Selection-->
+                            <div class="line"><label class="labels_left">UNITS:</label> <select id="unitSelection" class="form-control input_select" style="width:200px">
+                    <option value="imperial" class="slate">Imperial</option>
+                    <option value="metric" class="slate">Metric</option>
+                    </select>
+
+
+                                <!--  Submit Button-->
+                                <p><input class="btn btn-primary btn-lg submit" id="clickMe" type="button" value="Submit" onclick="postUrl();" /></p>
+
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+
+            </div>
+            <div class="col-md-6 textbox">
+                <span> <a href="https://www.ibm.com/us-en/marketplace/weather-company-data-packages"> <img src="images/weatherLogo1.png" style="width:150px; height:150px"></a></span>
+                <h1>Download Weather Data</h1>
+                <p>Use the form to download historical weather data using <b> <br/> The Weather Company (An IBM Business)</b> API<br/></p>
+                <br/>
+
+
+                <ul>
+                    <li> Get your API key by purchasing weather company data from
+                        <a href="https://www.ibm.com/us-en/marketplace/weather-company-data-packages"> <span style="color:blue"><b>here</b> </a></span> </li>
+                    <li> Zipcodes only work for USA. </li>
+                    <li> Weather data can be provided only for historical dates. <br/>"From Date" should be before the "To Date".</li>
+                    <li> Hourly and Daily data give back different weather features.</li>
+
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- /container -->
+
+
+
+</body>
+
+</html>
