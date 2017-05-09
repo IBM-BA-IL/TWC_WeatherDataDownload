@@ -14,18 +14,22 @@ The current html UI: https://ibm-ba-il.github.io/TWC_WeatherDataDownload/ allows
 UI Screenshot(Image): 
 ![](Docs/UIScreenshot.png?raw=true "UI Screenshot")
 
-The data is downloaded in CSV and can be on a daily or hourly level. 
-
-
-
+The data is downloaded in CSV and can be on a daily or hourly level.
 
 Example Daily(Image): 
 ![](Docs/DailyExample.png?raw=true "Daily Example Data")
 
-Example Hourly(Image): 
-![](Docs/HourlyExample.png?raw=true "Hourly Example Data")
+To download data from the UI you will need:
 
+1. A valid API Key for The Weather Channel Data Packages. Contact : https://www.ibm.com/us-en/marketplace/weather-company-data-packages
+2. Provide the form with a valid location. Please note Zipcode works only for US, lattitude and longitude work for all places. Use the dropdown to choose location input method.
+3. Provide a date range. Dates can only be historical, and the "From Date" should be before the "To Date"
+4. Time Interval can be "Hourly" or "Daily" which will determine what level the weather data is downloaded for. See Hourly and Daily examples above
+5. Weather variables can be shown using either "Metric" or "Imperial" units. 
 
+Please be adviced:
+
+1. The API used for the UI page will only work to retrieve ALL standard variables availaible from The Weather Channel API. To learn about the variables exported see this : [Weather Channel API Guide](Docs/TWC Cleaned Observations API Documentation.pdf)
 
 
 
