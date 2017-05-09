@@ -29,7 +29,7 @@ To download data from the UI you will need:
 
 Please be adviced:
 
-1. The API used for the UI page will only work to retrieve ALL standard variables availaible from The Weather Channel API. To learn about the variables exported see this : [Weather Channel API Guide](Docs/TWC_Cleaned_Observations_API_Documentation.pdf)
+1. The API used for the UI page will only work to retrieve ALL standard variables availaible from The Weather Channel API. To learn about the variables exported see this : [Weather Channel API Guide] (Docs/TWC_Cleaned Observations_API_Documentation.pdf)
 
 
 
