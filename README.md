@@ -15,9 +15,11 @@ The current html UI: https://ibm-ba-il.github.io/TWC_WeatherDataDownload/ allows
 
 
 Example Daily(Image): 
+[Daily Data Download Example](Docs/DailyExample.png)
 
 
 Example Hourly(Image): 
+[Hourly Data Download Example](Docs/HourlyExample.png)
 
 
 
