@@ -3,7 +3,7 @@
 
 This project will allow users to download weather data using a simple user interface that uses The Weather Company APIs to download weather data. The downloaded data throught your web browser will be availaible in csv format(can be changed by forking and editing code). 
 
-The user interface  for downloading the weather data can be found here : https://vsbhagi.github.io/TWC_WeatherDataDownload/
+The user interface  for downloading the weather data can be found here : https://ibm-ba-il.github.io/TWC_WeatherDataDownload/
 Please see the usage guide below for more details on existing functionality and ways to extend it.
 
 ## Usage
