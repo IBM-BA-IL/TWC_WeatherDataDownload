@@ -31,5 +31,15 @@ Please be adviced:
 
 1. The API used for the UI page will only work to retrieve ALL standard variables availaible from The Weather Channel API. To learn about the variables exported see this : [Weather Channel API Guide](Docs/TWC_CleanedObservations_API_Documentation.pdf)
 
+## License
+[Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
+
+## References
+[The Weather Company](http://www.theweathercompany.com/)
+
+[Historical Weather](https://docs.google.com/document/d/1asVeP3zFjSEYq_HXU4hpXgOcvz3jW1J2Z04guXCSZX0)
+
+[IBM MarketPlace for Sales](https://www.ibm.com/us-en/marketplace/weather-company-data-packages)
+
 
 
