@@ -27,9 +27,16 @@ To download data from the UI you will need:
 4. Time Interval can be "Hourly" or "Daily" which will determine what level the weather data is downloaded for. See Hourly and Daily examples above
 5. Weather variables can be shown using either "Metric" or "Imperial" units. 
 
-Please be adviced:
+### Current API Request Limitations and how to get over them
 
-1. The API used for the UI page will only work to retrieve ALL standard variables availaible from The Weather Channel API. To learn about the variables exported see this : [Weather Channel API Guide](Docs/TWC_CleanedObservations_API_Documentation.pdf)
+The UI and code are free to be redistributed, edited and added to according to the Apache 2.0 License. The current master branch (which is published on [github pages](https://ibm-ba-il.github.io/TWC_WeatherDataDownload/) ) is supposed to be light weight and a simple interface for interacting with the TWC API, hence it has the following limitations:
+
+1. The API hooked to the the UI page will only work to retrieve ALL standard variables availaible from The Weather Channel API.  If you want to limit the number of fields being used, you will need to send the chosen fields as part of the URL. This can be done by adding the fields as a string and appending it to the URL when making the request. Optionally you can also create a checkbox UI to select certain fields and pass them into the URL. All code for the URL formation is in the index.html page. To learn more about field selection please look at [Weather Channel API Guide(Docs/TWC_CleanedObservations_API_Documentation.pdf).
+2. Only Historical dates are expected. To get future forecasts please visit [The Weather Company](http://www.theweathercompany.com/) link and get information about APIS that can also send forecasted data for future dates.
+3. No date validation check
+4. Weather information for only a single location can be exported. 
+5. Different sets of fields are exported for "Hourly" and "Daily" interval. To learn more about it, please look at the API documentation in the docs folder.
+6. In the exported data, the time zone is set to GMT(by default), but can be changed by passing the desired time zone default as part of the url, code in index.html. 
 
 ## License
 [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
@@ -42,4 +49,6 @@ Please be adviced:
 [IBM MarketPlace for Sales](https://www.ibm.com/us-en/marketplace/weather-company-data-packages)
 
 
-
+## Contact/Authors
+Vikremjeet singh bhagi (vsbhagi@us.ibm.com)
+Ruth Briones (rbrione@us.ibm.com)
